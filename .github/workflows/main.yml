@@ -18,6 +18,14 @@ jobs:
         with:
           node-version: 12.x
       
+      - name: Cache client npm dependencies
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
       - name: Install client npm dependencies
         run: |
           cd client
